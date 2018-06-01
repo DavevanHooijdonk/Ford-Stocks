@@ -17,7 +17,7 @@ Navigate to fordstocks/authentication and run "mvn spring-boot:run" to start the
 
 - Api runs at http://localhost:8989 by default
 
-- Authentication server runs at http://localhost:9999 by default
+- Authentication server runs at http://localhost:9999 by default (http://localhost:9999/authentication/oauth/token for token)
 
 ## Usage
 
