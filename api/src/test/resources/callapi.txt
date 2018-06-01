@@ -1,0 +1,17 @@
+Sample Requests:
+(Missing data is from api si also missing from the csv file)
+
+1st Quarter 2018 close rate per day:
+http://localhost:8989/api/stockdata/average?name=ford&type=CLOSE&start=2018-01-01&end=2018-03-31&period=DAYS&precision=2
+
+30 Years close rate per year:
+http://localhost:8989/api/stockdata/average?name=ford&type=CLOSE&start=1977-01-01&end=2017-01-01&period=YEARS&precision=3
+
+Whole year of 2017 open rate per month:
+http://localhost:8989/api/stockdata/average?name=ford&type=OPEN&start=2017-01-01&end=2017-12-31&period=MONTHS&precision=3
+
+Februari of 2012 adjusted closing rate per day:
+http://localhost:8989/api/stockdata/average?name=ford&type=ADJ_CLOSE&start=2012-02-01&end=2012-02-29&period=DAYS&precision=6
+
+Sample illegal request:
+http://localhost:8989/api/stockdata/average?name=ford&type=ADJ_CLOSE&start=2012-02-01&end=2012-02-29&period=HOURS&precision=-1
