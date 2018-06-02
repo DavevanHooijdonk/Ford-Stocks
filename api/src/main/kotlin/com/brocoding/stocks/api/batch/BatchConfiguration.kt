@@ -124,7 +124,7 @@ class BatchConfiguration(@Value("stocks/*.csv") val resources: Array<Resource>,
                 ADJ_CLOSE to closeAdj!!,
                 VOLUME to volume!!
         )
-        StockData(name!!, properDate, dailyPrices)
+        StockData(name?.toLowerCase()!!, properDate, dailyPrices)
     }
 
     @Bean

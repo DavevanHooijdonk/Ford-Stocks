@@ -37,13 +37,14 @@ class StockPriceRepositoryTest {
 
     @Test
     fun `findByNameAndByDateBetween should send the correct query parameters to the database`() {
+        val name = "Dave"
 
         // When
-        stockPriceRepository.findByNameIgnoreCaseAndByDateBetween("Dave", MIN, MAX)
+        stockPriceRepository.findByNameAndByDateBetween(name, MIN, MAX)
 
         // Then
         verify(mongoOperations).find(queryCaptor.capture(), any() as Class<*>?)
-        assertEquals("Dave", queryCaptor.value.queryObject["name"].toString())
+        assertEquals(name.toLowerCase(), queryCaptor.value.queryObject["name"].toString())
 
         val document = queryCaptor.value.queryObject["date"] as Document
         assertEquals(MIN, document["${'$'}gte"])

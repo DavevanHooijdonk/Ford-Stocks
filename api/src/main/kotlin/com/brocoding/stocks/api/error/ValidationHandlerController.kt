@@ -1,13 +1,14 @@
 package com.brocoding.stocks.api.error
 
 import org.springframework.http.HttpStatus.BAD_REQUEST
-import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.validation.BindException
+import org.springframework.validation.FieldError
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import java.time.LocalDateTime.now
 import java.time.ZoneOffset.UTC
+import java.util.Collections.singletonList
 
 
 /**
@@ -16,8 +17,16 @@ import java.time.ZoneOffset.UTC
 @RestControllerAdvice
 class ValidationHandlerController {
 
-    companion object {
-        private const val MESSAGE = "Bad Request, Validation Failed"
+    /**
+     * @param exception IllegalArgumentException which contains information about the argument
+     *
+     * @return ErrorDetails containing detailed information about wrong input
+     */
+    @ExceptionHandler(IllegalArgumentException::class)
+    @ResponseStatus(BAD_REQUEST)
+    fun handleIllegalArgumentException(exception: IllegalArgumentException): ErrorDetails {
+
+        return ErrorDetails(now(UTC), VALIDATION_FAILED, details = singletonList(PARAM_MISSING))
     }
 
     /**
@@ -31,10 +40,17 @@ class ValidationHandlerController {
 
         val fieldErrors = exception.bindingResult.fieldErrors
         val invalidParameters = fieldErrors.map { getCorrectFieldName(it.field) }
-        val detailMessages = fieldErrors.map { it.defaultMessage }
+        val detailedMessages = fieldErrors.mapNotNull { getDetailedMessage(it) }
 
-        return ErrorDetails(now(UTC), MESSAGE, invalidParameters, detailMessages)
+        return ErrorDetails(now(UTC), VALIDATION_FAILED, invalidParameters, detailedMessages)
     }
+
+    private fun getDetailedMessage(field: FieldError): String? =
+            when (field.field) {
+                "type" -> WRONG_TYPE
+                "period" -> WRONG_PERIOD
+                else -> field.defaultMessage
+            }
 
     private fun getCorrectFieldName(name: String): String =
             when (name) {

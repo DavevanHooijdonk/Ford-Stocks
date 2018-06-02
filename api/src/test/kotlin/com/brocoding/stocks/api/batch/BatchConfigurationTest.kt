@@ -40,10 +40,9 @@ import kotlin.test.assertTrue
  * Created by Dave van Hooijdonk on 31-5-2018.
  */
 @RunWith(SpringRunner::class)
-//@ContextConfiguration()
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = [FordStocksApi::class])
-class StockPriceControllerTest {
+class BatchConfigurationTest {
 
     @Mock
     private lateinit var jobBuilderFactory: JobBuilderFactory
@@ -89,7 +88,7 @@ class StockPriceControllerTest {
         val closeAdj = valueOf(0.003195)
         val volume = valueOf(1089200)
         val stockDataCsv = StockDataCSV(name, "6/1/72", open, high, low, close, closeAdj, volume)
-        val referenceStockData = StockData(name, LocalDate.of(1972, 6, 1), mapOf(
+        val referenceStockData = StockData(name.toLowerCase(), LocalDate.of(1972, 6, 1), mapOf(
                 OPEN to open,
                 HIGH to high,
                 LOW to low,

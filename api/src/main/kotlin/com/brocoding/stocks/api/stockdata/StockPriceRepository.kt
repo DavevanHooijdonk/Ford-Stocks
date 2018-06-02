@@ -24,17 +24,17 @@ interface StockPriceAdvancedRepository {
      *
      * @return a List of StockData retrieved from the mongoDB
      */
-    fun findByNameIgnoreCaseAndByDateBetween(name: String, start: LocalDate, end: LocalDate): List<StockData>
+    fun findByNameAndByDateBetween(name: String, start: LocalDate, end: LocalDate): List<StockData>
 
 }
 
 
 class StockPriceAdvancedRepositoryImpl(private val mongoOperation: MongoOperations) : StockPriceAdvancedRepository {
 
-    override fun findByNameIgnoreCaseAndByDateBetween(name: String, start: LocalDate, end: LocalDate): List<StockData> {
+    override fun findByNameAndByDateBetween(name: String, start: LocalDate, end: LocalDate): List<StockData> {
 
         val query = Query().apply {
-            addCriteria(Criteria.where("name").regex(name, "i"))
+            addCriteria(Criteria.where("name").`is`(name.toLowerCase()))
             addCriteria(Criteria.where("date").gte(start).lte(end))
         }
 

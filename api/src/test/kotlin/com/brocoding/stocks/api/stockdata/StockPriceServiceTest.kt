@@ -48,7 +48,7 @@ class StockPriceServiceTest {
     fun `calculateAveragePrice should return emptyList if a DataAccessException is thrown`() {
         // Given
         val priceRequest = mock(AveragePriceRequest::class.java)
-        given(stockPriceRepository.findByNameIgnoreCaseAndByDateBetween(anyOrNull(), anyOrNull(), anyOrNull())).willThrow(QueryTimeoutException::class.java)
+        given(stockPriceRepository.findByNameAndByDateBetween(anyOrNull(), anyOrNull(), anyOrNull())).willThrow(QueryTimeoutException::class.java)
 
         // When
         val result = stockPriceService.calculateAveragePrice(priceRequest)
@@ -64,7 +64,7 @@ class StockPriceServiceTest {
         val startDate = date.minusDays(6)
         val priceRequest = AveragePriceRequest("ford", OPEN, startDate, date.plusDays(40), WEEKS, precision)
 
-        given(stockPriceRepository.findByNameIgnoreCaseAndByDateBetween(anyOrNull(), anyOrNull(), anyOrNull())).willAnswer { listOf(stockData1, stockData2, stockData3) }
+        given(stockPriceRepository.findByNameAndByDateBetween(anyOrNull(), anyOrNull(), anyOrNull())).willAnswer { listOf(stockData1, stockData2, stockData3) }
 
         // When
         val result = stockPriceService.calculateAveragePrice(priceRequest)
@@ -82,7 +82,7 @@ class StockPriceServiceTest {
         // Given
         val endDate = date.plusDays(52)
         val priceRequest = AveragePriceRequest("ford", OPEN, date.minusDays(20), endDate, MONTHS)
-        given(stockPriceRepository.findByNameIgnoreCaseAndByDateBetween(anyOrNull(), anyOrNull(), anyOrNull())).willAnswer { listOf(stockData1, stockData2, stockData3) }
+        given(stockPriceRepository.findByNameAndByDateBetween(anyOrNull(), anyOrNull(), anyOrNull())).willAnswer { listOf(stockData1, stockData2, stockData3) }
 
         // When
         val result = stockPriceService.calculateAveragePrice(priceRequest)

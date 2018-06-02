@@ -38,7 +38,7 @@ class StockPriceServiceBasic(private val stockPriceRepository: StockPriceReposit
 
         return try {
 
-            stockPriceRepository.findByNameIgnoreCaseAndByDateBetween(request.name, request.start, request.end)
+            stockPriceRepository.findByNameAndByDateBetween(request.name, request.start, request.end)
                     .groupBy { request.period.between(request.start, it.date) }
                     .mapTo(ArrayList()) { (amount, stockData) -> createAveragePrice(amount, stockData, request) }
 
