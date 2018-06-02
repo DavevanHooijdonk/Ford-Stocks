@@ -9,7 +9,7 @@ The goal of this application is to provide spring boot based api for serving for
 ## Installation
 Make sure you have maven (https://maven.apache.org/download.cgi)
 
-Make sure maven runs with jdk 1.8 (http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
+Make sure maven runs with jdk 1.8 x64 (http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
 
 Navigate to fordstocks/api and run "mvn spring-boot:run" to start the api
 
@@ -17,7 +17,7 @@ Navigate to fordstocks/authentication and run "mvn spring-boot:run" to start the
 
 - Api runs at http://localhost:8989 by default
 
-- Authentication server runs at http://localhost:9999 by default
+- Authentication server runs at http://localhost:9999 by default (http://localhost:9999/authentication/oauth/token for token)
 
 ## Usage
 
@@ -25,7 +25,7 @@ To authenticate to the api you need to retrieve a client credentials bearer toke
 
 - Client-id: ford 
 
-- Client-secret: secret
+- Client-secret: fordsecret
 
 The fordstocks/api/src/test/resources folder contains:
 
