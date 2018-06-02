@@ -9,7 +9,7 @@ The goal of this application is to provide spring boot based api for serving for
 ## Installation
 Make sure you have maven (https://maven.apache.org/download.cgi)
 
-Make sure maven runs with jdk 1.8 (http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
+Make sure maven runs with jdk 1.8 x64 (http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
 
 Navigate to fordstocks/api and run "mvn spring-boot:run" to start the api
 
