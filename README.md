@@ -25,7 +25,7 @@ To authenticate to the api you need to retrieve a client credentials bearer toke
 
 - Client-id: ford 
 
-- Client-secret: secret
+- Client-secret: fordsecret
 
 The fordstocks/api/src/test/resources folder contains:
 
